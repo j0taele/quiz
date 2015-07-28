@@ -1,0 +1,84 @@
+
+
+$  nvm ls  //saber las versiones de node instaladas
+$  nvm use v0.12.5  //indicamos la versión a utilizar
+$  cd mis_proyectos
+
+//Instalación de express
+
+$  npm install express-generator@4.9.0
+$  cd node_modules
+
+//Creo un proyecto de Git
+
+$  cd quiz
+$  git init
+$  git add  //Añado los cambios para que se reflejen en el siguiente commit
+$  touch .gitignore  // Todo lo que esté dentro de gitignore es ignorado por Git
+$  vim .gitignore
+
+//Contenido de .gitignore:
+jotaele@jotaeleWeb:~/mis_proyectos/node_modules/quiz$ cat .gitignore
+node_modules
+npm-debug.log
+
+$  git commit -m "esqueleto express-generator"  
+
+$  npm install  //Instalamos todas las dependencias incluidas en "package.json"
+$  npm start   //Iniciamos el servidor
+  
+// Varios comandos GIT
+$  git add .  //Añadimos todos los ficheros
+$  git status //información sobre cambios en ficheros
+$  git log --oneline  //Información en una sola línea de todos los commits
+$  git commit -m "Quiz v2"
+$  git remote add origin https://github.com/j0taele/quiz.git  //Enlazamos con Github
+$  git push origin master  //Actualizamos el proyecto en GitHub
+$  git add .
+$  git commit -a -m "Primera pregunta"  //lo mismo que si hacemos un "git add" + "git commit -m" 
+$  git push -u origin master
+$  git commit --amend -m "Primera pregunta" // con --amend modificamos el último commit
+
+// Marco de la aplicación (layout.ejs)
+
+$  install --save express-partials@0.3.0
+$  git commit -a -m "Marco General"
+$  git push -u origin master
+
+// HEROKU
+  
+  $  wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+  $  heroku login
+  $  heroku create
+  $  heroku apps:rename quiz-2015
+  $  heroku open
+  $  heroku apps:rename quiz-jl
+  $  heroku open
+  $  git commit -a -m "Heroku"
+  $  git push -u origin master
+  $  git push heroku master   //Actualizo el servidor de Heroku con Git
+  $  foreman start  //Inicio el servidor local de Heroku
+  $  git push heroku master
+ 
+ // Ramas (branches)
+
+$  git branch creditos  //Creo la rama creditos
+$  git checkout creditos  //Cambio a rama credicos
+$  git add .
+$  git commit  -a -m "Creditos"
+$  git push -u origin master
+$  git push -u heroku master
+$  git push heroku master
+$  git branch
+$  git checkout creditos
+$  git add .
+$  git commit -a -m "creditos"
+$  git push origin master
+$  git branch
+$  git checkout master
+$  git push heroku master
+$  git add .
+$  git commit -m "Media querys"
+$  git push -u origin master
+$  git push -u heroku master
+
