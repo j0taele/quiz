@@ -10,7 +10,11 @@
     "npm": "1.4.x"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "sqlite3": "^3.0.9"
+=======
+    "sqlite3": "^3.0.4"
+>>>>>>> 66fa8431efa552ac60032ae64ef4ebf22317e469
   },
   "dependencies": {
     "body-parser": "~1.8.1",
@@ -23,6 +27,11 @@
     "pg": "^4.1.1",
     "pg-hstore": "^2.3.2",
     "sequelize": "^3.4.1",
+<<<<<<< HEAD
     "serve-favicon": "~2.1.3", 
+=======
+    "serve-favicon": "~2.1.3",
+    "sqlite3": "^3.0.9"
+>>>>>>> 66fa8431efa552ac60032ae64ef4ebf22317e469
   }
 }
