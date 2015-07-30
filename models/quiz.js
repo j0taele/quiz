@@ -1,5 +1,6 @@
-// Definicion del modelo de Quiz
-
+// Definicion del modelo de Quiz 
+// define la estructura de la tabla de quizes
+ 
 module.exports = function(sequelize, DataTypes) {
 	return sequelize.define('Quiz',
 			{
