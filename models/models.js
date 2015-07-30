@@ -16,7 +16,7 @@ var storage  = process.env.DATABASE_STORAGE;
 // Cargar Modelo ORM
 var Sequelize = require('sequelize');
 
-// Usar BBDD SQLite:
+// Usar BBDD SQLite o Postgres
 var sequelize = new Sequelize(DB_name, user, pwd, 
   { dialect:  protocol,
     protocol: protocol,
@@ -27,12 +27,11 @@ var sequelize = new Sequelize(DB_name, user, pwd,
   }      
 );
 
-
 // Importar definicion de la tabla Quiz
 var quiz_path = path.join(__dirname,'quiz');
 var Quiz = sequelize.import(quiz_path);
 
-exports.Quiz = Quiz; // exportar definición de tabla Quiz
+exports.Quiz = Quiz; // exportar tabla Quiz
 
 // sequelize.sync() inicializa tabla de preguntas en DB
 sequelize.sync().then(function() {
@@ -40,10 +39,10 @@ sequelize.sync().then(function() {
   Quiz.count().then(function (count){
     if(count === 0) {   // la tabla se inicializa solo si está vacía
       Quiz.bulkCreate( 
-+        [ {pregunta: 'Capital de Italia',   respuesta: 'Roma'},
-+          {pregunta: 'Capital de Portugal', respuesta: 'Lisboa'}
-+        ]
-+      ).then(function(){console.log('Base de datos inicializada')});
+        [ {pregunta: 'Capital de Italia',   respuesta: 'Roma'},
+          {pregunta: 'Capital de Portugal', respuesta: 'Lisboa'}
+        ]
+      ).then(function(){console.log('Base de datos inicializada')});
     };
   });
 });
