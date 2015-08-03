@@ -1,42 +1,63 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8"><title> Preguntas </title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <link rel='stylesheet'
-        type='text/css'
-        media='only screen and (min-width: 530px) and (min-device-width: 481px)'
-        href='/stylesheets/wide.css' 
-  />
-  <link rel='stylesheet'
-      type='text/css'
-      media='only screen and (max-width: 480px)'
-      href='/stylesheets/smartphone.css' 
-  />
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-</head> 
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var partials = require('express-partials');
 
-<body>
-<div id="page-wrap">
-  <header class="main" id="h1">
-    <h2>Quiz<span>: el juego de las preguntas</span></h2>
-  </header>
+var routes = require('./routes/index');
 
-  <nav class="main" id="n1" role="navigation">
-    <span><a href="/">Inicio</a></span>
-    <span><a href="/quizes">Preguntas</a></span>
-  </nav>
+var app = express();
 
-  <section class="main" id="s1">
-    <div>
-      <%- body %>
-    </div>
-  </section>
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
-  <footer class="main" id="f1">
-    <a href="https://github.com/j0taele/quiz">
-      GitHub del proyecto</a>
-  </footer>
-</div>
-</body> 
-</html> 
+app.use(partials());
+// uncomment after placing your favicon in /public
+// app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', routes);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err,
+            errors: []
+        });
+    });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {},
+        errors: []
+    });
+});
+
+
+module.exports = app;
